@@ -1,0 +1,346 @@
+
+*{  
+    user-select: none; 
+    box-sizing: border-box;  
+    font-family: "Fira Code";  
+}
+@font-face{
+    src:url('./assets/FiraCode-Medium.otf');
+
+    font-family: "Fira Code";  
+}
+html{
+    background: #26282b;
+    display: flex;
+    flex-direction: column;
+}
+body{
+    background: #26282b;
+    margin: 0px;
+    position: relative;
+    width:100%;
+    margin:auto;
+    max-width:500px;
+}
+
+.bump-dark{
+    box-shadow: -6px -6px 20px #5a646d,6px 6px 20px #101013,inset 3px 3px 20px #3f464d,-3px -3px 20px #101013;
+    background:#26282b ;
+}
+.flex,
+.flex-v{
+    display: flex;
+    flex-wrap: wrap;
+}
+.flex-v{
+    flex-direction: column;
+}
+.even-spacing{
+    align-items: center;
+    justify-content: center;
+}
+button{
+    border:none;
+    width:2rem;
+    height:2rem;
+    border-radius: 100%;
+    color:#fff;
+    outline:none;
+    box-shadow: -6px -6px 20px #5a646d,6px 6px 20px #101013,inset 3px 3px 20px #3f464d,-3px -3px 20px #101013;
+    background:#26282b ;
+    margin:auto;
+}
+button:active{
+    box-shadow: 6px 6px 20px #5a646d,-6px -6px 20px #101013,inset 3px 3px 20px #3f464d,-3px -3px 20px #101013;
+    transform:scale(0.95);
+    transition: 0.1s linear;
+}
+
+
+/* 
+/////////////////////////////
+*/
+
+#player{
+    z-index: 100;
+    display: none;
+    transition: 0.3s linear;
+}
+.footer{
+    font-size:0.8rem;
+    margin:auto;
+    color:#aaa;
+    margin-top:10px;
+    padding-top:10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-top:1px dashed #aaa;
+}
+#playerCover{
+    margin:30px auto;
+    width:150px;
+    height:150px;
+    border-radius: 100%;
+    overflow: hidden;
+    border:4px solid #101013;
+}
+img{
+    max-height: 100%;
+}
+
+#playList{
+    margin:35px 0px 35px 0px;
+    border-radius:10px;
+    width:100%;
+    /* border-top:2px solid #222; */
+}
+#playList>.list{
+    padding:30px ;
+    width:100%;
+    color:#ddd;
+    margin-top:0px;
+    margin-bottom:0px;
+    position: relative;
+    border-radius: 20px;
+    /* border:1px solid #fff; */
+}
+#playList>.list>.info>.author{
+    font-size:0.8rem;
+    color:#999;
+}
+#playList>.list>.play{
+    position: absolute;
+    top:50%;
+    right:5px;
+    transform:translate(-50%,-50%);
+    background: #cb3010;
+}
+
+#playList>.list.active{
+    transition:0.3s linear; 
+    background:#16171a;
+}
+#playList>.list.active>.play{
+    box-shadow:-6px -6px 20px #5a646d,6px 6px 20px #101013,inset 0px 0px 20px transparent,0px 0px 20px transparent; 
+    transition:0.3s linear; 
+}
+
+/* 
+//////////////////
+controls
+*/
+#controls{
+    background: #26282b;
+    position: absolute;
+    top:0px;
+    left:0px;
+    min-width: 100vw;
+    min-height: 100vh;
+    z-index:1000;
+    padding:20px;
+    display: none;
+}
+#controls.show{
+    display: flex;
+    animation: slideUp 0.4s linear;
+}
+#controlsNav{
+    padding:0px 20px;
+    position: relative;
+    margin-bottom:40px;
+}
+#controlsNav>#title{
+    margin:auto;
+    color:#aaa;
+    width: auto;
+    text-align: center;
+}
+#controlsNav>#backToPlayer{
+    position: absolute;
+    top:50%;
+    left:20px;
+    transform:translate(-50%,-50%);
+}
+#mainCover{
+    width:200px;
+    height:200px;
+    border-radius: 100%;
+    overflow: hidden;
+    margin:10px auto;
+}
+#controlsInfo{
+    margin:20px auto;
+}
+#controlsInfo>#infoName{
+    color:#ccc;
+    font-size:1.4rem;
+    margin:auto;
+}
+#controlsInfo>#infoAuthor{
+    color:#777;
+    font-size:1rem;
+}
+#time>#seekBar{
+    margin-top:20px;
+    width:100%;
+    height:6px;
+    border-radius: 10px;
+    background: #090b0b;
+    box-shadow: 0px 2px 4px #777;
+    --seekbar-thumb-width:25px;
+}
+#time>#seekBar>#seekTrack{
+    width:calc(100% - var(--seekbar-thumb-width));
+    height: 100%;
+    border-radius: 10px 0px 0px 10px;
+    overflow: hidden;
+}
+#seekTrack>#seekTrackFilled{    
+    background: linear-gradient(to right,#e83e16,#d99f16);
+    width:100%;
+    height:100%;
+}
+
+
+#seekBar>#seekTrackThumb{
+    width:var(--seekbar-thumb-width);
+    height:var(--seekbar-thumb-width);
+    border-radius:100%;
+    transition: 0.05s linear;
+    /* margin:none; */
+    background:#d99f16;
+    transform:translateY(-25%);
+    border:8px solid #272b30;
+    box-shadow: 0px 0px 15px #333;
+}
+#btnControls{
+    margin:auto;
+    margin-top:40px;
+}
+#btnControls>button{
+    font-size:2rem;
+    width:4rem;
+    height:4rem;
+    margin:10px;
+}
+
+/* 
+/////////////////
+*/
+
+#Loader{
+    font-size: 2.5rem;
+    color:#fff;
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100vh;
+    text-align: center;
+    overflow: hidden;
+    /* display:none; */
+}
+#Loader > div >small{
+
+    font-size:0.8rem;
+}
+#Loader > div,
+#Loader > div:before{
+    position: absolute;
+    top:50%;
+    left:50%;
+    font-family: Arial, Helvetica, sans-serif;
+    transform:translate(-50%,-50%);
+    animation:1s linear infinite breath alternate;
+}
+#Loader > div:before{
+    content: '';
+    width:100%;
+    height:100%;
+    padding:25px;
+    transform:translate(-50%,-50%) rotate(-8deg);
+    border-radius:10px 20px 10px 10px / 5px 20px 100px 50px;
+    /* border:4px solid #fff; */
+    box-shadow: -3px -3px 10px #aaa,
+                3px 3px 10px #333;
+    
+    background: linear-gradient(to bottom right,#112,transparent);
+}
+
+#LoaderStat{
+    font-size: 1rem;
+    position: absolute;
+    max-width: 100vw;
+    bottom:0px;
+    left:50%;
+    padding:20px;
+    transform:translate(-50%,0%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#LoaderStat::after{
+    content: '';
+    position: absolute;
+    left:0px;
+    animation:0.5s linear infinite load;
+}
+
+@keyframes breath {
+    0%{
+        filter: brightness(0%);
+    }
+    10%{
+        
+        filter: brightness(0%);
+    }
+    90%{
+
+        filter: brightness(150%);
+    }
+    100%{
+        
+        filter: brightness(150%);
+    }
+}
+
+@keyframes load{
+    0%{
+        content: '[-]';
+    }
+    25%{
+        
+        content: '[\\]';
+    }
+    50%{
+        
+        content: '[|]';
+    }
+    75%{
+        
+        content: '[/]';
+    }
+    100%{
+        
+        content: '[-]';
+    }
+}
+
+@keyframes slideUp{
+    0%{
+        opacity: 0;
+        top:100%;
+    }
+    100%{
+        opacity: 1;
+        top:0%;
+    }
+}
+
+
+@media only screen and (min-width:500px){
+    body{
+        transition:0.3s linear;
+        margin: 100px auto;
+        border-radius:10px;
+        box-shadow:-4px -4px 20px #777,4px 4px 20px #222;
+    }
+}

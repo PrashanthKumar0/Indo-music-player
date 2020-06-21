@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="./style.css">
+	<script src="./script.js"></script>
+</head>
+
+<body>
+
+
+
+	<div id="player" class="flex-v">
+		<div class="flex even-spacing">
+			<button id="fav"> &lt= </button>
+			<div id="playerCover" class="bump-dark">
+				<img src="./assets/cover/alan-walker.jpg" alt="bad wolves">
+			</div>
+			<button id="list">::</button>
+		</div>
+		<div id="playList" class="flex-v">
+
+<!-- 
+			<div class="list flex">
+				<div class="info" class="flex-v">
+					<div class="name">Zombie</div>
+					<div class="author">Bad Wolves</div>
+				</div>
+
+				<button class="play">
+					|>
+				</button>
+			</div> 
+-->
+
+		</div>
+
+		<div class="footer">
+			Made With 🎧 By Prashanth Kumar
+		</div>
+	</div>
+
+	<div id="controls" class="flex-v">
+		<div class="flex" id="controlsNav">
+			<button id="backToPlayer">&lt=</button>
+			<div id="title"> Now Playing </div>
+		</div>
+
+		<div id="mainCover" class="bump-dark">
+			<img src="./assets/cover/alan-walker.jpg" alt="" srcset="">
+		</div>
+
+		<div id="controlsInfo" class="flex-v">
+			<div id="infoName">Ignite</div>
+			<div id="infoAuthor">Alan Walker</div>
+		</div>
+
+		<div id="time" class="flex-v">
+			<div id="timeInfo" class="flex" style="font-size: 0.75rem;color:#999;">
+				<span id="elapsed">0:0</span>
+				<span id="total" style="margin-left:auto">00:00</span>
+			</div>
+
+			<div id="seekBar" class="flex">
+				<div id="seekTrack">
+					<div id="seekTrackFilled"></div>
+				</div>
+				<div id="seekTrackThumb"></div>
+			</div>
+			<div id="btnControls">
+				<button id="playPreviousBtn">&lt</button>
+				<button style="background:#e9560c" id="playNowBtn">|></button>
+				<button id="playNextBtn">&gt;</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="Loader" class='screen'>
+		<div>
+			Indo <br> 
+			<!-- nice name na ? -->
+			<small>Music player </small>
+		</div>
+		<span id="LoaderStat">Loading </span>
+	</div>
+
+</body>
+
+</html>
