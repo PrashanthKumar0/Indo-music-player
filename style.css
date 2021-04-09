@@ -1,18 +1,18 @@
-
 *{  
     user-select: none; 
     box-sizing: border-box;  
     font-family: "Fira Code";  
-}
-@font-face{
-    src:url('./assets/FiraCode-Medium.otf');
-
-    font-family: "Fira Code";  
+    scroll-behavior: smooth;
+    /* idk where it goes xD */
 }
 html{
     background: #26282b;
     display: flex;
     flex-direction: column;
+}
+@font-face{
+    font-family: "Fira Code";
+    src:url("./assets/FiraCode-Medium.otf");
 }
 body{
     background: #26282b;
@@ -49,6 +49,7 @@ button{
     box-shadow: -6px -6px 20px #5a646d,6px 6px 20px #101013,inset 3px 3px 20px #3f464d,-3px -3px 20px #101013;
     background:#26282b ;
     margin:auto;
+    transition: 0.1s linear;
 }
 button:active{
     box-shadow: 6px 6px 20px #5a646d,-6px -6px 20px #101013,inset 3px 3px 20px #3f464d,-3px -3px 20px #101013;
@@ -85,6 +86,8 @@ button:active{
     border:4px solid #101013;
 }
 img{
+    min-width:100%;
+    min-height: 100%;
     max-height: 100%;
 }
 
@@ -129,6 +132,7 @@ img{
 //////////////////
 controls
 */
+#visuals,
 #controls{
     background: #26282b;
     position: absolute;
@@ -140,6 +144,7 @@ controls
     padding:20px;
     display: none;
 }
+#visuals.show,
 #controls.show{
     display: flex;
     animation: slideUp 0.4s linear;
@@ -343,4 +348,34 @@ controls
         border-radius:10px;
         box-shadow:-4px -4px 20px #777,4px 4px 20px #222;
     }
+}
+
+#visuals{
+    max-width:100vw;
+    overflow: hidden;
+}
+canvas{
+    width:100%;
+    border-radius:20px;
+    display: block;
+}
+
+#FileUpload{
+    position: fixed;
+    bottom:10px;
+    right:10px;
+}
+#file{
+    display: none;
+}
+#FileUpload > label{
+    display: inline-block;
+    width:3rem;
+    height:3rem;
+    padding-top: 0.2rem;
+    color:#fff;
+    text-align: center;
+    font-size: 2rem;
+    border-radius: 100%;
+    background:linear-gradient(to left, #e83e16,#d99f16);
 }

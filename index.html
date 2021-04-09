@@ -6,16 +6,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<link rel="stylesheet" href="./style.css">
+	<script src="./id3-minimized.js"></script>
 	<script src="./script.js"></script>
 </head>
 
 <body>
 
-
-
 	<div id="player" class="flex-v">
 		<div class="flex even-spacing">
-			<button id="fav"> &lt= </button>
+			<button id="showVisual"> &uarr; </button>
 			<div id="playerCover" class="bump-dark">
 				<img src="./assets/cover/alan-walker.jpg" alt="bad wolves">
 			</div>
@@ -38,8 +37,12 @@
 
 		</div>
 
+		<div id="FileUpload">
+			<input type="file" id="file" accept=".mp3,.mp4" multiple="true">
+			<label for="file">+</label>
+		</div>
 		<div class="footer">
-			Made With 🎧 By Prashanth Kumar
+			Made With Music By Prashanth Kumar
 		</div>
 	</div>
 
@@ -87,6 +90,13 @@
 		<span id="LoaderStat">Loading </span>
 	</div>
 
+	<div id="visuals" class="flex-v">
+		<div class="flex">
+			<button id="backToPlayerV" style="margin:auto 15px;display:inline-block;">&larr;</button>
+			<div id="titleVisual" style="margin:auto;display:inline-block;color:#ccc">Playing Now</div>
+		</div>
+		<canvas id="cnvs"></canvas>
+	</div>
 </body>
 
 </html>
