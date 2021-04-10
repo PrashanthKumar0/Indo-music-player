@@ -208,7 +208,7 @@ function init(){
     $("file").onchange=hFileUpload;
     ShowSongs();
     addSeekEvents();
-    
+    currentElm=_("[data-song-index='0'] > button");
 }
 
 audio.onpause=function(){
@@ -270,27 +270,55 @@ function fileUploaded(url,mp3Url){
     });
 }
 
-
+var seekbarDragging=false;
 function addSeekEvents(){
     
-    //seek start
+    //for seeking and dragging on touch screens
+    $("seekBar").ontouchstart=function(e){
+        seekbarDragging=true;
+        audio.pause();
+    }
 
     $("seekBar").ontouchmove=function(e){
-        var x_correction=e.target.getBoundingClientRect().x - e.target.offsetLeft;
-        audio.pause();
-        audio.currentTime=(((e.touches[0].clientX -x_correction - $("seekTrackThumb").offsetWidth/2   )/$("seekBar").offsetWidth)*audio.duration);
+        if(seekbarDragging){
+            var x_correction=e.target.getBoundingClientRect().x - e.target.offsetLeft;
+            audio.currentTime=(((e.touches[0].clientX -x_correction - $("seekTrackThumb").offsetWidth/2   )/$("seekBar").offsetWidth)*audio.duration);
+        }
     };
-
+    
     //seek end
     $("seekBar").ontouchend=function(e){
-        audio.play();
+        if(seekbarDragging){
+            audio.play();
+            seekbarDragging=false;
+        }
     };
+    
     
     $("seekBar").onclick=function(e){
         var x_correction=e.target.getBoundingClientRect().x - e.target.offsetLeft;
         // audio.play();
         audio.currentTime= (((e.clientX - x_correction - $("seekTrackThumb").offsetWidth/2)/$("seekBar").offsetWidth)*audio.duration) ;
     };
+
+    //for seeking and dragging on pc
+    $("seekBar").onmousedown=function(e){
+        seekbarDragging=true;
+    }
+    document.body.onmouseup=function(e){
+        if(seekbarDragging){
+            seekbarDragging=false;
+            audio.play();
+        }
+    }
+    document.body.onmousemove=function(e){
+        if(seekbarDragging){
+            var x_correction=e.target.getBoundingClientRect().x - e.target.offsetLeft;
+            audio.pause();
+            audio.currentTime= (((e.clientX - x_correction - $("seekTrackThumb").offsetWidth/2)/$("seekBar").offsetWidth)*audio.duration) ;
+        }
+    }
+
 }
 
 //visualization part
