@@ -157,10 +157,13 @@ function InsertSong(obj){
     })
 }
 
+var initialBodyMargin="auto";
 function showControls(){
     $("player").style.filter="grayscale(0.6)";
     $("player").style.opacity="0";
     setTimeout(function(){
+        initialBodyMargin=document.body.style.margin;
+        document.body.style.margin="0px";
         $("player").style.display="none";
     },350)
     $("controls").classList.add("show");    
@@ -169,6 +172,7 @@ function hideControls(){
     $("player").style.filter="grayscale(0)";
     $("player").style.opacity="1";
     setTimeout(function(){
+        document.body.style.margin=initialBodyMargin;
         $("player").style.display="flex";
     },350)
     $("controls").classList.remove("show");    
@@ -215,6 +219,10 @@ audio.onpause=function(){
 audio.onplay=function(){
     $("playNowBtn").innerHTML='||';
     currentElm.innerHTML='||';
+}
+
+audio.onended=function(){
+    setTimeout(playNext,1000);
 }
 
 function togglePlay(){
@@ -268,18 +276,20 @@ function addSeekEvents(){
     //seek start
 
     $("seekBar").ontouchmove=function(e){
+        var x_correction=e.target.getBoundingClientRect().x - e.target.offsetLeft;
         audio.pause();
-        audio.currentTime=(((e.touches[0].clientX - $("seekTrackThumb").offsetWidth/2   )/$("seekBar").offsetWidth)*audio.duration);
+        audio.currentTime=(((e.touches[0].clientX -x_correction - $("seekTrackThumb").offsetWidth/2   )/$("seekBar").offsetWidth)*audio.duration);
     };
 
     //seek end
     $("seekBar").ontouchend=function(e){
         audio.play();
     };
-
+    
     $("seekBar").onclick=function(e){
+        var x_correction=e.target.getBoundingClientRect().x - e.target.offsetLeft;
         // audio.play();
-        audio.currentTime=(((e.clientX - $("seekTrackThumb").offsetWidth/2   )/$("seekBar").offsetWidth)*audio.duration);
+        audio.currentTime= (((e.clientX - x_correction - $("seekTrackThumb").offsetWidth/2)/$("seekBar").offsetWidth)*audio.duration) ;
     };
 }
 
